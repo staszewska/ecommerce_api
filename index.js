@@ -1,9 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const Models = require("./models");
+
+const Order = Models.Order;
 
 const uuid = require("uuid");
 
 const app = express();
+
+// For local MongoDB
+mongoose.connect("mongodb://localhost:27017/orders", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 /**
  Middleware function; 
