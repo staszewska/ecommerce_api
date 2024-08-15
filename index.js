@@ -37,8 +37,8 @@ app.get("/orders", async (req, res) => {
 });
 
 // add new order
-app.post("/orders", (req, res) => {
-  Order.create({
+app.post("/orders", async (req, res) => {
+  await Order.create({
     Item: req.body.Item,
     Payment: req.body.Payment,
     Total: req.body.Total,
