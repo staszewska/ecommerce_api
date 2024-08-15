@@ -1,20 +1,7 @@
 const mongoose = require("mongoose");
 
-let orderSchema = new mongoose.Schema({
-  Item: {
-    type: [String], // array of strings
-    required: true,
-  },
-  Payment: {
-    type: String,
-    required: true,
-  },
-  Total: {
-    type: Number,
-    required: true,
-  },
-
-  Receiver: {
+let receiverSchema = new mongoose.Schema(
+  {
     Name: {
       type: String,
       required: true,
@@ -41,8 +28,28 @@ let orderSchema = new mongoose.Schema({
       match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Basic email validation
     },
   },
+  { _id: false }
+);
+
+let orderSchema = new mongoose.Schema({
+  Item: {
+    type: [String], // array of strings
+    required: true,
+  },
+  Payment: {
+    type: String,
+    required: true,
+  },
+  Total: {
+    type: Number,
+    required: true,
+  },
+  Receiver: {
+    type: receiverSchema,
+    required: true,
+  },
 });
 
-const Order = mongoose.model("Model", orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 module.exports = Order;
