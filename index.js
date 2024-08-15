@@ -5,8 +5,6 @@ const Models = require("./models");
 
 const Order = require("./models");
 
-// const uuid = require("uuid");
-
 const app = express();
 
 // For local MongoDB
