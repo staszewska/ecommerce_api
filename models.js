@@ -10,7 +10,7 @@ let receiverSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    postalCode: {
+    PostalCode: {
       type: String,
       required: true,
     },
@@ -22,7 +22,7 @@ let receiverSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
+    Email: {
       type: String,
       required: true,
       match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Basic email validation
@@ -33,7 +33,7 @@ let receiverSchema = new mongoose.Schema(
 
 let orderSchema = new mongoose.Schema({
   Item: {
-    type: [String], // array of strings
+    type: [Object], // array of objects
     required: true,
   },
   Payment: {
