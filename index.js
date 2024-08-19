@@ -2,10 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Models = require("./models");
+const cors = require("cors");
 
 const Order = require("./models");
 
 const app = express();
+
+// Use CORS
+app.use(cors());
 
 // For local MongoDB
 mongoose.connect("mongodb://localhost:27017/orders", {
@@ -36,14 +40,34 @@ app.get("/orders", async (req, res) => {
 
 // add new order
 app.post("/orders", async (req, res) => {
+  console.log(req.body);
+
+  const receiver = {
+    Name: req.body.fullName,
+    Address: req.body.address,
+    PostalCode: req.body.postalCode,
+    City: req.body.city,
+    Phone: req.body.phone,
+    Email: req.body.email,
+  };
+
+  const payment = req.body.payment;
+
+  // console.log(receiver);
+
+  const total = req.body.getSumOfCart;
+  // console.log(total)
+
+  const items = req.body.shoppingCart;
+
   await Order.create({
-    Item: req.body.Item,
-    Payment: req.body.Payment,
-    Total: req.body.Total,
-    Receiver: req.body.Receiver,
+    Item: items,
+    Payment: payment,
+    Total: total,
+    Receiver: receiver,
   })
     .then((order) => {
-      // console.log("Order created: ", order);
+      console.log("Order created: ", order);
       res.status(201).json(order);
     })
     .catch((error) => {
